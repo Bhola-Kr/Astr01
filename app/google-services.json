@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "116992121683",
+    "project_id": "astro4call-9e872",
+    "storage_bucket": "astro4call-9e872.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116992121683:android:226cd5a7da8f419daf5fa6",
+        "android_client_info": {
+          "package_name": "com.astro4callapp.astro4call"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116992121683-b8h3c7lkdcrcgf46chf7hvr8i2pbcsf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuyZVWlIUS2ghn908SbfCJy8xOWN-jf2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116992121683-b8h3c7lkdcrcgf46chf7hvr8i2pbcsf4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

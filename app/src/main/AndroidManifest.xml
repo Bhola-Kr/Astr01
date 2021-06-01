@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.astro4callapp.astro4call">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Astro4Call">
+        <activity android:name=".chats.ChatDetails"></activity>
+        <activity android:name=".astrologer.AstroDetailsActivity" />
+        <activity android:name=".invitation.RejectActivity" />
+        <activity android:name=".invitation.AcceptActivity" />
+        <activity android:name=".astrologer.AstrologerListAct" />
+        <activity android:name=".register.SplashAct">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".register.PhoneAct" />
+        <activity android:name=".register.Register" />
+        <activity android:name=".home.MainActivity" />
+        <activity android:name=".userslist.UesrListAdapterAct" />
+    </application>
+
+</manifest>
