@@ -72,7 +72,7 @@ public class PhoneAct extends AppCompatActivity {
         ccp = findViewById(R.id.ccp);
         ccp.registerCarrierNumberEditText(phoneText);
 
-        getSupportActionBar().hide();
+        // getSupportActionBar().hide();
         contiuneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

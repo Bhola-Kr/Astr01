@@ -11,7 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Astro4Call">
-        <activity android:name=".chats.ChatDetails"></activity>
+        <activity android:name=".navigation_act.SupportActivity"></activity>
+        <activity android:name=".navigation_act.PaymentActivity" />
+        <activity android:name=".navigation_act.CallHistryActivity" />
+        <activity android:name=".navigation_act.HomeActivity" />
+        <activity android:name=".navigation_act.PackageActivity" />
+        <activity android:name=".chats.ChatDetails" />
         <activity android:name=".astrologer.AstroDetailsActivity" />
         <activity android:name=".invitation.RejectActivity" />
         <activity android:name=".invitation.AcceptActivity" />

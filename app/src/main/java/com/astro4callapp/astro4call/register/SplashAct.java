@@ -37,7 +37,7 @@ public class SplashAct extends AppCompatActivity {
                 finish();
             }
         }else{
-            getSupportActionBar().hide();
+          //  getSupportActionBar().hide();
             new Thread()
             {
                 public void run()

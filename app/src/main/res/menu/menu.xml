@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/home" />
+
+    <item
+        android:id="@+id/packages"
+        android:icon="@drawable/wallet"
+        android:title="Package" />
+
+    <item
+        android:id="@+id/callhistory"
+        android:icon="@drawable/ic_call_icon"
+        android:title="Call History" />
+
+    <item
+        android:id="@+id/paymenthistory"
+        android:icon="@drawable/payments"
+        android:title="Payment History" />
+
+    <item
+        android:id="@+id/support"
+        android:icon="@drawable/support"
+        android:title="Support" />
+
+    <item
+        android:id="@+id/share_app"
+        android:icon="@drawable/shareapp"
+        android:title="Share App" />
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/log_out_img"
+        android:title="Logout" />
+
+    </menu>

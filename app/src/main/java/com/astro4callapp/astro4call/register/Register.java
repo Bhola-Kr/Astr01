@@ -78,7 +78,7 @@ public class Register extends AppCompatActivity {
         number = getIntent().getStringExtra("number");
 
 
-        getSupportActionBar().hide();
+        // getSupportActionBar().hide();
         final Calendar calendar = Calendar.getInstance();
         et_dobDate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)

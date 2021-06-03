@@ -8,15 +8,50 @@
     android:background="@drawable/chat_details_back3"
     tools:context=".chats.ChatDetails">
 
+ <RelativeLayout
+     android:id="@+id/tool_chat"
+     android:background="@color/purple_500"
+     android:layout_width="match_parent"
+     android:layout_height="?actionBarSize">
+
+     <de.hdodenhof.circleimageview.CircleImageView
+         android:background="@drawable/welcome_img"
+         android:layout_marginLeft="@dimen/_10sdp"
+         android:id="@+id/chat_profile"
+         android:layout_centerVertical="true"
+         android:layout_width="@dimen/_40sdp"
+         android:layout_height="@dimen/_40sdp"/>
+
+     <TextView
+         android:layout_marginLeft="@dimen/_10sdp"
+         android:textSize="@dimen/_15ssp"
+         android:gravity="center_vertical"
+         android:layout_centerVertical="true"
+         android:textStyle="bold"
+         android:textColor="#000"
+         android:text="UesrName"
+         android:layout_toRightOf="@id/chat_profile"
+         android:id="@+id/tv_chat_name"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"/>
+
+ </RelativeLayout>
+
+    <View
+        android:layout_below="@id/tool_chat"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_4sdp"
+        android:background="@drawable/toolbar_dropshadow"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/tool_chat"
         android:id="@+id/chatRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/liner_layout" />
 
     <LinearLayout
+        android:elevation="@dimen/_10sdp"
         android:id="@+id/liner_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

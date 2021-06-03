@@ -28,7 +28,7 @@ public class RejectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reject);
 
-        getSupportActionBar().hide();
+  //      getSupportActionBar().hide();
 
 
 /*--          get current user phone number -----*/
