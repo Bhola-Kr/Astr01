@@ -7,9 +7,13 @@ public class Constants {
     public static final String KEY_COLLECTIONS_USERS = "users";
     public static final String KEY_FIRST_NAME = "first_name";
     public static final String KEY_PHONE_NUMBER = "phone_number";
+    public static final String KEY_ASTROLOGER = "astro";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_USER_ID = "user_id";
+    public static final String KEY_USER_REG_ID1 = "reg_id";
+
+    public static final String KEY_US_REG_ID = "reg_id";
 
 
     public static final String KEY_FCM_TOKEN = "fcm_token";

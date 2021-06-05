@@ -29,7 +29,7 @@ public class ChatDetails extends AppCompatActivity {
     FirebaseAuth auth;
     ImageView send_message;
     EditText et_sendMessage;
-    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

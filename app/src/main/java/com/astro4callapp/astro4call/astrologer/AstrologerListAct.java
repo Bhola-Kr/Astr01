@@ -1,5 +1,11 @@
 package com.astro4callapp.astro4call.astrologer;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -11,14 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.astro4callapp.astro4call.R;
 import com.astro4callapp.astro4call.navigation_act.CallHistryActivity;
 import com.astro4callapp.astro4call.navigation_act.HomeActivity;
@@ -27,8 +25,6 @@ import com.astro4callapp.astro4call.navigation_act.PaymentActivity;
 import com.astro4callapp.astro4call.navigation_act.SupportActivity;
 import com.astro4callapp.astro4call.register.PhoneAct;
 import com.astro4callapp.astro4call.utilities.PreferenceManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,11 +32,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
 
 public class AstrologerListAct extends AppCompatActivity {
 
@@ -150,21 +143,19 @@ public class AstrologerListAct extends AppCompatActivity {
 
         preferenceManager = new PreferenceManager( getApplicationContext() );
 
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                            return; }
-                        String token = task.getResult();
-
-                        sendTokentoServer(token);
-                        // Toast.makeText(AstrologerListAct.this, ""+token, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
+//        FirebaseMessaging.getInstance().getToken()
+//                .addOnCompleteListener(new OnCompleteListener<String>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<String> task) {
+//                        if (!task.isSuccessful()) {
+//                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+//                            return; }
+//                       String  token = task.getResult();
+//
+//                       sendFCMTokenToDatabase( token );
+//                      // Toast.makeText(AstrologerListAct.this, ""+token, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 
         myRef = FirebaseDatabase.getInstance().getReference().child( "Astrologer" );
 
@@ -173,7 +164,7 @@ public class AstrologerListAct extends AppCompatActivity {
         recyclerView.setLayoutManager( new LinearLayoutManager( this ) );
         list = new ArrayList<>();
 
-        astroAdapter = new AstroAdapter( list, getApplicationContext() );
+        astroAdapter = new AstroAdapter( list, getApplicationContext());
         recyclerView.setAdapter( astroAdapter );
         swipeRefreshLayout = findViewById( R.id.swipeRefreshLayout );
         swipeRefreshLayout.setOnRefreshListener( this::getUesrs );
@@ -184,8 +175,7 @@ public class AstrologerListAct extends AppCompatActivity {
 
     }
 
-    private void sendTokentoServer(String token) {
-
+    private void sendFCMTokenToDatabase(String token) {
 
     }
 
@@ -245,7 +235,7 @@ public class AstrologerListAct extends AppCompatActivity {
                 }
 
 
-                astroAdapter = new AstroAdapter( list, getApplicationContext() );
+                astroAdapter = new AstroAdapter( list, getApplicationContext());
                 recyclerView.setAdapter( astroAdapter );
                 astroAdapter.notifyDataSetChanged();
 
@@ -257,6 +247,6 @@ public class AstrologerListAct extends AppCompatActivity {
             }
         } );
 
-
     }
+
 }

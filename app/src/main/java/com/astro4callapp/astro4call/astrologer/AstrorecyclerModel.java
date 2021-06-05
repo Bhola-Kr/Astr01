@@ -2,7 +2,7 @@ package com.astro4callapp.astro4call.astrologer;
 
 public class AstrorecyclerModel {
 
-    String name, exp, charge, image, uesrId, rating, status;
+    String name, exp, charge, image, uesrId, rating, status,token;
 
     public AstrorecyclerModel() {
     }
@@ -12,10 +12,6 @@ public class AstrorecyclerModel {
         this.exp = exp;
         this.charge = charge;
         this.image = image;
-        this.uesrId = uesrId;
-    }
-
-    public AstrorecyclerModel(String uesrId) {
         this.uesrId = uesrId;
     }
 
@@ -73,5 +69,13 @@ public class AstrorecyclerModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

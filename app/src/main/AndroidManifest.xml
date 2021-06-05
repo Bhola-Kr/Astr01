@@ -24,14 +24,26 @@
         <activity android:name=".register.SplashAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".register.PhoneAct" />
-        <activity android:name=".register.Register" />
-        <activity android:name=".home.MainActivity" />
+        <activity android:name=".register.Register" >
+        </activity>
+        <activity android:name=".home.MainActivity" >
+
+        </activity>
+
         <activity android:name=".userslist.UesrListAdapterAct" />
+
+        <service
+            android:name=".firebase.MessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

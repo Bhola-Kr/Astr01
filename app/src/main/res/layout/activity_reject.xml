@@ -9,6 +9,7 @@
     tools:context=".invitation.RejectActivity">
 
     <ImageView
+        android:elevation="@dimen/_10sdp"
         android:id="@+id/out_imageMeetingType"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
@@ -80,9 +81,10 @@
     </LinearLayout>
 
     <ImageView
+        android:elevation="@dimen/_10sdp"
         android:id="@+id/reject_send_meeting_iv"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         android:background="@drawable/close_back"
         android:src="@drawable/ic_reject"
         app:layout_constraintBottom_toBottomOf="parent"
