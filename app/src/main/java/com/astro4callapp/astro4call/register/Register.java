@@ -257,6 +257,12 @@ public class Register extends AppCompatActivity {
 
             } else {
                 reference = rootNode.getReference().child( "Users" );
+                String id=reference.getKey();
+                Toast.makeText( this, ""+id, Toast.LENGTH_SHORT ).show();
+                Log.d( "iddd",id );
+
+                preferenceManager.putString(Constants.KEY_USER_REG_ID1,id);
+
                 reference.push().setValue( us );
                 editor.putString( KEY_NAME, number );
                 editor.putString( KEY_ASTRO, null );

@@ -2,4 +2,9 @@
     <string name="app_name">Astro4Call</string>
     <string name="open">open</string>
     <string name="close">close</string>
+
+
+    <string name="agora_app_id">b9123ad329e843a29d7cec7c378b5e73</string>
+    <string name="agora_access_token">006b9123ad329e843a29d7cec7c378b5e73IAC11k+lWR1w+uEGG/u9CPfccXVhvSGrTQl4Nk50mrpn6Qx+f9gAAAAAEADIUmqkN6i8YAEAAQA1qLxg</string>
+
 </resources>

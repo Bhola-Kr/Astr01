@@ -31,6 +31,7 @@ public class ChatDetails extends AppCompatActivity {
     EditText et_sendMessage;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

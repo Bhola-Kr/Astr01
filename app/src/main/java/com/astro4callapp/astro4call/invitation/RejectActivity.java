@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astro4callapp.astro4call.R;
+import com.astro4callapp.astro4call.audio_video.AudioActivity;
+import com.astro4callapp.astro4call.audio_video.VideoCallingActivity;
 import com.astro4callapp.astro4call.network.ApiClient;
 import com.astro4callapp.astro4call.network.ApiService;
 import com.astro4callapp.astro4call.utilities.Constants;
@@ -67,7 +69,7 @@ public class RejectActivity extends AppCompatActivity {
         preferenceManager = new PreferenceManager( getApplicationContext() );
 
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference().child( "Astrologers" ).child(preferenceManager.getString( Constants.KEY_USER_REG_ID1 ));
+        reference = rootNode.getReference().child( "Users" ).child(preferenceManager.getString( Constants.KEY_USER_REG_ID1 ));
 
         ImageView imageViewMeetingType = findViewById( R.id.out_imageMeetingType );
         TextView textFirstChar = findViewById( R.id.text_invit_send_firstChar );
@@ -217,6 +219,18 @@ public class RejectActivity extends AppCompatActivity {
             if (type != null) {
                 if (type.equals( Constants.REMOTE_MSG_INVITATION_ACCEPTED )) {
                     try {
+
+//                        Toast.makeText( context, "", Toast.LENGTH_SHORT ).show();
+
+                        if (type.equals( "audio" )){
+
+                        }else {
+
+                            startActivity( new Intent(getApplicationContext(), AudioActivity.class) );
+                            finish();
+                           // startActivity( new Intent(getApplicationContext(),VideoCallingActivity.class) );
+                          //  finish();
+                        }
                         //  URL serverUrl=new URL("https://meet.jit.si");
 //                        JitsiMeetConferenceOptions.Builder builder=new JitsiMeetConferenceOptions.Builder();
 //                        builder.setServerURL(serverUrl);

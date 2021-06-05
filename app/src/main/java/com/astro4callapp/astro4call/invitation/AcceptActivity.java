@@ -9,11 +9,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astro4callapp.astro4call.R;
+import com.astro4callapp.astro4call.audio_video.AudioActivity;
+import com.astro4callapp.astro4call.audio_video.VideoCallingActivity;
 import com.astro4callapp.astro4call.network.ApiClient;
 import com.astro4callapp.astro4call.network.ApiService;
 import com.astro4callapp.astro4call.utilities.Constants;
@@ -134,6 +137,22 @@ public class AcceptActivity extends AppCompatActivity {
 
                     if (type.equals(Constants.REMOTE_MSG_INVITATION_ACCEPTED)) {
                         try {
+
+                            Log.d("value",type);
+
+                            if (type.equals( "audio" )){
+//                                startActivity( new Intent(getApplicationContext(), AudioActivity.class) );
+//                                finish();
+                            }else {
+
+                                startActivity( new Intent(getApplicationContext(), AudioActivity.class) );
+                                finish();
+                                // startActivity( new Intent(getApplicationContext(),VideoCallingActivity.class) );
+                              //  finish();
+                            }
+
+
+
 //                            URL serverUrl=new URL("https://meet.jit.si");
 //
 //                            JitsiMeetConferenceOptions.Builder builder=new JitsiMeetConferenceOptions.Builder();

@@ -82,4 +82,6 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
+// agora dependencies for video and audio calling.
+    implementation 'com.github.agorabuilder:native-full-sdk:3.4.1'
 }
