@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -94,8 +95,10 @@ public class ChatAdapter extends RecyclerView.Adapter{
 
         if(holder.getClass()==SenderViewHolder.class){
             ((SenderViewHolder)holder).senderMesage.setText(messagesModel.getMessage());
+           // ((ReciverViewHolder) holder).iv_sentRecive_check.setImageResource(R.drawable.checked);
         }else {
             ((ReciverViewHolder)holder).reciverMesage.setText(messagesModel.getMessage());
+            //((ReciverViewHolder) holder).iv_sentRecive_check.setImageResource(R.drawable.checked_green);
         }
 
     }
@@ -109,20 +112,24 @@ public class ChatAdapter extends RecyclerView.Adapter{
     public class ReciverViewHolder extends RecyclerView.ViewHolder{
 
         TextView reciverMesage,reciverTime;
+        ImageView iv_sentRecive_check;
 
         public ReciverViewHolder(@NonNull View itemView) {
             super(itemView);
             reciverMesage=itemView.findViewById(R.id.reciver_tv);
             reciverTime=itemView.findViewById(R.id.reciver_tv_time);
+            iv_sentRecive_check=itemView.findViewById( R.id.chat_blueTick );
         }
     }
     public class SenderViewHolder extends RecyclerView.ViewHolder{
         TextView senderMesage,senderTime;
+        ImageView iv_sent_check;
 
         public SenderViewHolder(@NonNull View itemView) {
             super(itemView);
             senderMesage=itemView.findViewById(R.id.tv_sender_msg);
             senderTime=itemView.findViewById(R.id.tv_sender_time);
+            iv_sent_check=itemView.findViewById( R.id.chat_blueTick );
 
         }
     }

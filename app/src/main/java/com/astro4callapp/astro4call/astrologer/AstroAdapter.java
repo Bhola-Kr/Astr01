@@ -2,7 +2,6 @@ package com.astro4callapp.astro4call.astrologer;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.astro4callapp.astro4call.R;
 import com.astro4callapp.astro4call.chats.ChatDetails;
 import com.astro4callapp.astro4call.invitation.RejectActivity;
-import com.astro4callapp.astro4call.utilities.Constants;
-import com.astro4callapp.astro4call.utilities.PreferenceManager;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -44,10 +42,10 @@ public class AstroAdapter extends RecyclerView.Adapter<AstroAdapter.AstroViewHol
         final AstrorecyclerModel model = new AstrorecyclerModel();
 
 
-//        Glide.with(context).load(datalist.get(position).getImage())
-//                .into(holder.image);
+        Glide.with(context).load(datalist.get(position).getImage())
+                .into(holder.image);
 
-        Picasso.get().load( model.getImage() ).placeholder( R.drawable.welcome_img ).into( holder.image );
+       //  Picasso.get().load( model.getImage() ).into( holder.image );
 
 
         holder.name.setText( datalist.get( position ).getName() );
@@ -57,6 +55,8 @@ public class AstroAdapter extends RecyclerView.Adapter<AstroAdapter.AstroViewHol
 
         String status = datalist.get( position ).getStatus();
         String token = datalist.get( position ).getToken();
+
+
 
         if (status.equals( "online" )) {
             holder.online.setVisibility( View.VISIBLE );
@@ -133,9 +133,15 @@ public class AstroAdapter extends RecyclerView.Adapter<AstroAdapter.AstroViewHol
                     } else {
 
                         Intent intent = new Intent( context, ChatDetails.class );
-                        intent.putExtra( "userId", datalist.get( position ).getUesrId() );
+                        intent.putExtra( "astroKey", datalist.get( position ).getUesrId() );
+                        intent.putExtra( "astroName", datalist.get( position ).getName() );
+                        intent.putExtra( "astroImage", datalist.get( position ).getImage() );
+                        intent.putExtra( "charge", datalist.get( position ).getCharge() );
+
                         intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
                         context.startActivity( intent );
+
+                       // Toast.makeText( context, ""+datalist.get( position ).getUesrId(), Toast.LENGTH_SHORT ).show();
                     }
                 }
             }
@@ -148,7 +154,7 @@ public class AstroAdapter extends RecyclerView.Adapter<AstroAdapter.AstroViewHol
                 intent.putExtra( "name", holder.name.getText().toString() );
                 intent.putExtra( "exp", holder.exp.getText().toString() );
                 intent.putExtra( "charge", holder.charge.getText().toString() );
-                intent.putExtra( "image", model.getImage() );
+                intent.putExtra( "image", datalist.get( position ).getImage() );
 
                 intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
                 context.startActivity( intent );
@@ -162,7 +168,7 @@ public class AstroAdapter extends RecyclerView.Adapter<AstroAdapter.AstroViewHol
                 intent.putExtra( "name", holder.name.getText().toString() );
                 intent.putExtra( "exp", holder.exp.getText().toString() );
                 intent.putExtra( "charge", holder.charge.getText().toString() );
-                intent.putExtra( "image", model.getImage() );
+                intent.putExtra( "image", datalist.get( position ).getImage() );
 
                 intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
                 context.startActivity( intent );

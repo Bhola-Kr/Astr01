@@ -67,7 +67,6 @@ public class Register extends AppCompatActivity {
     private String name, dob, time, place, gender, astro, number;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -75,7 +74,7 @@ public class Register extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        currentUser =FirebaseAuth.getInstance().getCurrentUser();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         et_name = findViewById( R.id.et_name );
         et_dobDate = findViewById( R.id.et_dob );
@@ -91,8 +90,6 @@ public class Register extends AppCompatActivity {
         preferenceManager = new PreferenceManager( getApplicationContext() );
 
         number = getIntent().getStringExtra( "number" );
-
-
 
 
         final Calendar calendar = Calendar.getInstance();
@@ -116,17 +113,16 @@ public class Register extends AppCompatActivity {
         } );
 
 
-
         radioButton_Male.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Toast.makeText( Register.this, "" + radioButton_Male.getText(), Toast.LENGTH_SHORT ).show();
+                // Toast.makeText( Register.this, "" + radioButton_Male.getText(), Toast.LENGTH_SHORT ).show();
             }
         } );
         radioFemale.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Toast.makeText( Register.this, "" + radioFemale.getText(), Toast.LENGTH_SHORT ).show();
+                // Toast.makeText( Register.this, "" + radioFemale.getText(), Toast.LENGTH_SHORT ).show();
             }
         } );
 
@@ -142,18 +138,19 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseMessaging.getInstance().getToken()
-                        .addOnCompleteListener(new OnCompleteListener<String>() {
+                        .addOnCompleteListener( new OnCompleteListener<String>() {
                             @Override
                             public void onComplete(@NonNull Task<String> task) {
                                 if (!task.isSuccessful()) {
-                                    Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                                    return; }
-                                String  token = task.getResult();
-                              //  sendToken( token );
-                                registerUser(token);
+                                    Log.w( TAG, "Fetching FCM registration token failed", task.getException() );
+                                    return;
+                                }
+                                String token = task.getResult();
+                                //  sendToken( token );
+                                registerUser( token );
                                 // Toast.makeText( Register.this, ""+token, Toast.LENGTH_SHORT ).show();
                             }
-                        });
+                        } );
             }
         } );
 
@@ -175,8 +172,6 @@ public class Register extends AppCompatActivity {
     }
 
     public void registerUser(String token) {
-
-        String userId=FirebaseAuth.getInstance().getUid();
 
         name = et_name.getText().toString();
         if (radioButton_Male.isChecked()) {
@@ -215,7 +210,7 @@ public class Register extends AppCompatActivity {
             us.put( "number", number );
             us.put( "status", "online" );
             us.put( "token", token );
-            us.put( "userId", userId );
+            us.put( "chat_status", "online" );
 
 
             rootNode = FirebaseDatabase.getInstance();
@@ -224,13 +219,10 @@ public class Register extends AppCompatActivity {
             if (checkBox.isChecked()) {
                 reference = rootNode.getReference().child( "Astrologers" ).push();
 
-                String id=reference.getKey();
+                String id = reference.getKey();
 
-                Toast.makeText( this, ""+id, Toast.LENGTH_SHORT ).show();
-
-                Log.d( "iddd",id );
-
-               preferenceManager.putString(Constants.KEY_USER_REG_ID1,id);
+                preferenceManager.putString( Constants.KEY_USER_REG_ID1_ASTRO, id );
+                preferenceManager.putString( Constants.KEY_FIRST_NAME, name );
 
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put( "name", name );
@@ -241,34 +233,37 @@ public class Register extends AppCompatActivity {
                 hashMap.put( "status", "online" );
                 hashMap.put( "number", number );
                 hashMap.put( "token", token );
-                us.put( "userId", userId );
+                hashMap.put( "chat_status", "online" );
+                hashMap.put( "userId", id );
 
                 //   reference.setValue(helper); // this for update data
-                reference.setValue(hashMap);
+                reference.setValue( hashMap );
                 editor.putString( KEY_NAME, number );
                 editor.putString( KEY_ASTRO, astro );
                 editor.apply();
 
-                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                intent.putExtra( "key",id );
-                Log.d( "id",id );
+                Intent intent = new Intent( getApplicationContext(), MainActivity.class );
+                intent.putExtra( "key", id );
+                Log.d( "id", id );
                 startActivity( intent );
 
 
             } else {
-                reference = rootNode.getReference().child( "Users" );
-                String id=reference.getKey();
-                Toast.makeText( this, ""+id, Toast.LENGTH_SHORT ).show();
-                Log.d( "iddd",id );
 
-                preferenceManager.putString(Constants.KEY_USER_REG_ID1,id);
+                reference = rootNode.getReference().child( "Users" ).push();
+                String id = reference.getKey();
 
-                reference.push().setValue( us );
+                us.put( "userId", id );
+
+                preferenceManager.putString( Constants.KEY_USER_REG_ID1, id );
+                preferenceManager.putString( Constants.KEY_FIRST_NAME, name );
+
+                reference.setValue( us );
                 editor.putString( KEY_NAME, number );
                 editor.putString( KEY_ASTRO, null );
                 editor.apply();
-               startActivity( new Intent( getApplicationContext(), AstrologerListAct.class ) );
-              finish();
+                startActivity( new Intent( getApplicationContext(), AstrologerListAct.class ) );
+                finish();
             }
 
         }

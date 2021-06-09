@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.astro4callapp.astro4call.R;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 public class AstroDetailsActivity extends AppCompatActivity {
@@ -38,11 +39,15 @@ public class AstroDetailsActivity extends AppCompatActivity {
         String charge = intent.getStringExtra("charge");
         String exp = intent.getStringExtra("exp");
 
-        Picasso.get().load(image).placeholder(R.drawable.astro_image).into(astroImage);
 
-        nameds.setText(name);
-        chargeText.setText(charge);
-        expText.setText(exp);
+        if (intent !=null){
+            nameds.setText(name);
+            chargeText.setText(charge);
+            expText.setText(exp);
+            Glide.with(getApplicationContext()).load(image).into(astroImage);
+        }else {
+            Picasso.get().load(image).placeholder(R.drawable.astro_image).into(astroImage);
+        }
 
     }
 }

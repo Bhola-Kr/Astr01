@@ -28,12 +28,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Astro4Call">
-        <activity android:name=".audio_video.AudioActivity"></activity>
+        <activity android:name=".navigation_act.PaymentGetwayActivity"></activity>
+        <activity android:name=".audio_video.AudioActivity" />
         <activity android:name=".audio_video.VideoCallingActivity" />
-        <activity android:name=".navigation_act.SupportActivity" />
         <activity android:name=".navigation_act.PaymentActivity" />
         <activity android:name=".navigation_act.CallHistryActivity" />
-        <activity android:name=".navigation_act.HomeActivity" />
         <activity android:name=".navigation_act.PackageActivity" />
         <activity android:name=".chats.ChatDetails" />
         <activity android:name=".astrologer.AstroDetailsActivity" />

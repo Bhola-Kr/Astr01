@@ -99,10 +99,10 @@ public class AudioActivity extends AppCompatActivity {
             initAgoraEngineAndJoinChannel();
         }
 
-        preferenceManager = new PreferenceManager( getApplicationContext() );
-
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference().child( "Astrologers" ).child(preferenceManager.getString( com.astro4callapp.astro4call.utilities.Constants.KEY_USER_REG_ID1 ));
+//        preferenceManager = new PreferenceManager( getApplicationContext() );
+//
+//        rootNode = FirebaseDatabase.getInstance();
+//        reference = rootNode.getReference().child( "Astrologers" ).child(preferenceManager.getString( com.astro4callapp.astro4call.utilities.Constants.KEY_USER_REG_ID1_ASTRO ));
 
     }
 
@@ -162,7 +162,6 @@ public class AudioActivity extends AppCompatActivity {
         RtcEngine.destroy();
         mRtcEngine = null;
 
-        updateStatus( "online" );
     }
 
     // Tutorial Step 7
@@ -200,6 +199,7 @@ public class AudioActivity extends AppCompatActivity {
     // Tutorial Step 3
     public void onEncCallClicked(View view) {
         finish();
+      //  onBackPressed();
     }
 
     // Tutorial Step 1
@@ -232,11 +232,13 @@ public class AudioActivity extends AppCompatActivity {
     // Tutorial Step 3
     private void leaveChannel() {
         mRtcEngine.leaveChannel();
+       // onBackPressed();
     }
 
     // Tutorial Step 4
     private void onRemoteUserLeft(int uid, int reason) {
         showLongToast(String.format( Locale.US, "user %d left %d", (uid & 0xFFFFFFFFL), reason));
+      //  onBackPressed();
       //  View tipMsg = findViewById(R.id.quick_tips_when_use_agora_sdk); // optional UI
       //  tipMsg.setVisibility(View.VISIBLE);
     }
@@ -246,21 +248,6 @@ public class AudioActivity extends AppCompatActivity {
         showLongToast(String.format(Locale.US, "user %d muted or unmuted %b", (uid & 0xFFFFFFFFL), muted));
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        updateStatus( "busy" );
-    }
-
-    public void updateStatus(String status) {
-        reference.child( "status" ).setValue( status );
-    }
 }
 
 

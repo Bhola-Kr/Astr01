@@ -51,8 +51,6 @@ public class RejectActivity extends AppCompatActivity {
     private String meetingType = null;
     private MediaPlayer player;
     private String reciverToken = null;
-    private FirebaseDatabase rootNode;
-    private DatabaseReference reference;
 
 
     @Override
@@ -68,14 +66,11 @@ public class RejectActivity extends AppCompatActivity {
 
         preferenceManager = new PreferenceManager( getApplicationContext() );
 
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference().child( "Users" ).child(preferenceManager.getString( Constants.KEY_USER_REG_ID1 ));
-
         ImageView imageViewMeetingType = findViewById( R.id.out_imageMeetingType );
         TextView textFirstChar = findViewById( R.id.text_invit_send_firstChar );
         TextView textName = findViewById( R.id.text_invit_send_UserName );
         TextView texMeeting = findViewById( R.id.textsendingMeetingInvition1 );
-        // TextView textEmail = findViewById(R.id.textInvit_sind_Email);
+        TextView textEmail = findViewById(R.id.textInvit_sind_Email);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra( "name" );
@@ -220,17 +215,18 @@ public class RejectActivity extends AppCompatActivity {
                 if (type.equals( Constants.REMOTE_MSG_INVITATION_ACCEPTED )) {
                     try {
 
-//                        Toast.makeText( context, "", Toast.LENGTH_SHORT ).show();
-
-                        if (type.equals( "audio" )){
-
-                        }else {
-
-                            startActivity( new Intent(getApplicationContext(), AudioActivity.class) );
-                            finish();
+                        if (meetingType != null) {
+                            if (meetingType.equals("video")) {
+                                startActivity( new Intent(getApplicationContext(),VideoCallingActivity.class) );
+                                finish();
+                            }else{
+                                startActivity( new Intent(getApplicationContext(),AudioActivity.class) );
+                                finish();
+                            }
+                        }
                            // startActivity( new Intent(getApplicationContext(),VideoCallingActivity.class) );
                           //  finish();
-                        }
+
                         //  URL serverUrl=new URL("https://meet.jit.si");
 //                        JitsiMeetConferenceOptions.Builder builder=new JitsiMeetConferenceOptions.Builder();
 //                        builder.setServerURL(serverUrl);
@@ -263,9 +259,6 @@ public class RejectActivity extends AppCompatActivity {
                 invitationResponseReceiver,
                 new IntentFilter( Constants.REMOTE_MSG_INITIATION_RESPONSE )
         );
-
-        updateStatus( "busy" );
-
     }
 
     @Override
@@ -298,14 +291,4 @@ public class RejectActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        stopPlayer();
-        updateStatus( "online" );
-    }
-
-    public void updateStatus(String status) {
-        reference.child( "status" ).setValue( status );
-    }
 }

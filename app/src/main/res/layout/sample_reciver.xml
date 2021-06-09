@@ -13,6 +13,8 @@
 
 
     <TextView
+        android:text="send"
+        android:layout_margin="@dimen/_5sdp"
         android:textColor="#000"
         android:id="@+id/reciver_tv"
         android:layout_width="wrap_content"

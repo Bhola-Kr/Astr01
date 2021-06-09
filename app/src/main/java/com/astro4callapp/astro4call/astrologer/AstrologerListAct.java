@@ -2,7 +2,11 @@ package com.astro4callapp.astro4call.astrologer;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,12 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.astro4callapp.astro4call.R;
+import com.astro4callapp.astro4call.UpdateWallet;
 import com.astro4callapp.astro4call.navigation_act.CallHistryActivity;
-import com.astro4callapp.astro4call.navigation_act.HomeActivity;
 import com.astro4callapp.astro4call.navigation_act.PackageActivity;
 import com.astro4callapp.astro4call.navigation_act.PaymentActivity;
-import com.astro4callapp.astro4call.navigation_act.SupportActivity;
 import com.astro4callapp.astro4call.register.PhoneAct;
+import com.astro4callapp.astro4call.utilities.Constants;
 import com.astro4callapp.astro4call.utilities.PreferenceManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AstrologerListAct extends AppCompatActivity {
+public class AstrologerListAct extends AppCompatActivity implements UpdateWallet {
 
     RecyclerView recyclerView;
     ArrayList<AstrorecyclerModel> list;
@@ -50,7 +54,8 @@ public class AstrologerListAct extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
-    TextView toolbartext;
+    TextView toolbartext,toolPrice;
+    ImageView toolwalletImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,26 +63,54 @@ public class AstrologerListAct extends AppCompatActivity {
         setContentView( R.layout.activity_astrologer_main );
         auth = FirebaseAuth.getInstance();
 
-
+        preferenceManager = new PreferenceManager( getApplicationContext() );
         navigationView = (NavigationView) findViewById(R.id.navigationview);
         drawerLayout = findViewById(R.id.drawer);
         toolbar = findViewById(R.id.toolbar);
          setSupportActionBar(toolbar);
         toolbartext = findViewById(R.id.toolbar_text);
+        toolwalletImage=findViewById( R.id.wallet );
+        toolPrice=findViewById( R.id.tool_price );
+
+
         toolbar.setTitle("");
         toolbartext.setText("");
+
+
+
+        //String price_wallet=toolPrice.getText().toString();
+
+        //Long l_price= Long.valueOf( price_wallet );
+
+       // preferenceManager.putFloatVal(Constants.KEY_WALLET_FLOAT_AMOUNT,100.0f);
+
+
+
+
+        Log.d( "getVal", ""+preferenceManager.getFloat( Constants.KEY_WALLET_FLOAT_UPDATED_AMOUNT ) );
+
+        toolwalletImage.setImageResource( R.drawable.wallet );
+
+
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
         toggle.syncState();
         drawerLayout.addDrawerListener(toggle);
 
+        View hview = navigationView.getHeaderView(0);
+        TextView mNameTextView = (TextView) hview.findViewById(R.id.Guestname);
+        TextView user_timeNav = (TextView) hview.findViewById(R.id.user_time);
+        // CircleImageView img = (CircleImageView) hview.findViewById(R.id.Guestphoto);
+        mNameTextView.setText( preferenceManager.getString( Constants.KEY_FIRST_NAME ) );
+
+
 
         navigationView.setNavigationItemSelectedListener(item -> {
 
             switch (item.getItemId()) {
                 case R.id.home:
-                    startActivity(new Intent(AstrologerListAct.this, HomeActivity.class));
+                   // startActivity(new Intent(AstrologerListAct.this, HomeActivity.class));
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
 
@@ -97,15 +130,25 @@ public class AstrologerListAct extends AppCompatActivity {
                     break;
 
                 case R.id.support:
-                    startActivity(new Intent(AstrologerListAct.this, SupportActivity.class));
+
+
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                "mailto","astro4call@gmail.com", null));
+                        startActivity(Intent.createChooser(intent, "Choose an Email client :"));
+
+                    }catch (Exception exception){
+                        Toast.makeText(this, ""+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
 
                 case R.id.share_app:
                     Intent shareintent = new Intent(Intent.ACTION_SEND);
                     shareintent.setType("text/plain");
-                    String sharebody = "Download this Application now:-https://play.google.com/store/apps/details?id=com.T3UnisexGym.t3unisexgym&hl=en";
-                    String shareSub = "T3 Fitness Unisex Gym";
+                    String sharebody = "Download this Application now:-com.astro4callapp.astro4call.astrologer=en";
+                    String shareSub = "Astro4Call";
                     shareintent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
                     shareintent.putExtra(Intent.EXTRA_TEXT, sharebody);
                     startActivity(Intent.createChooser(shareintent, "Share Using"));
@@ -141,7 +184,7 @@ public class AstrologerListAct extends AppCompatActivity {
 
 
 
-        preferenceManager = new PreferenceManager( getApplicationContext() );
+
 
 //        FirebaseMessaging.getInstance().getToken()
 //                .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -174,6 +217,8 @@ public class AstrologerListAct extends AppCompatActivity {
         //  getData();
 
     }
+
+
 
     private void sendFCMTokenToDatabase(String token) {
 
@@ -249,4 +294,34 @@ public class AstrologerListAct extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getUpdatedWallet();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getUpdatedWallet();
+    }
+
+    public void getUpdatedWallet(){
+        if (preferenceManager.getFloat( Constants.KEY_WALLET_FLOAT_AMOUNT ) > preferenceManager.getFloat( Constants.KEY_WALLET_FLOAT_UPDATED_AMOUNT )  ){
+
+            Log.d( "getVal", ""+preferenceManager.getFloat( Constants.KEY_WALLET_FLOAT_UPDATED_AMOUNT ) );
+
+            toolPrice.setText( ""+preferenceManager.getFloat( Constants.KEY_WALLET_FLOAT_UPDATED_AMOUNT ) );
+        }else {
+            toolPrice.setText( ""+preferenceManager.getFloat( Constants.KEY_WALLET_FLOAT_AMOUNT ) );
+        }
+
+    }
+
+    @Override
+    public void updateWallet() {
+        getUpdatedWallet();
+    }
 }

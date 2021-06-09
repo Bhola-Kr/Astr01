@@ -5,6 +5,11 @@ import java.util.HashMap;
 public class Constants {
 
     public static final String KEY_COLLECTIONS_USERS = "users";
+    public static final String KEY_WALLET_AMOUNT = "amount";
+    public static final String KEY_WALLET_FLOAT_AMOUNT = "amount";
+    public static final String KEY_WALLET_FLOAT_UPDATED_AMOUNT = "amount";
+
+    public static final String KEY_ASTRO_USERS = "astro";
     public static final String KEY_FIRST_NAME = "first_name";
     public static final String KEY_PHONE_NUMBER = "phone_number";
     public static final String KEY_ASTROLOGER = "astro";
@@ -12,6 +17,10 @@ public class Constants {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_USER_ID = "user_id";
     public static final String KEY_USER_REG_ID1 = "reg_id";
+
+    public static final String KEY_USER_REG_ID1_ASTRO= "current_astro_id";
+
+    public static final String KEY_USERS_ASTRO_CHATID = "chat_id";
 
     public static final String KEY_US_REG_ID = "reg_id";
 

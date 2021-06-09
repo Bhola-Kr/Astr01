@@ -1,35 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:background="#FAE0D8"
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FAE0D8"
     tools:context=".home.MainActivity">
 
-   <TextView
-       android:gravity="center"
-       android:textSize="35sp"
-       android:layout_marginTop="100dp"
-       android:text="You have login as a astrologer "
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"/>
-
-    <Button
-        android:textSize="16sp"
-        android:textColor="#FFF"
-        android:layout_centerInParent="true"
-        android:onClick="logout"
+    <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        tools:context=".astrologer.AstrologerListAct"
+        android:id="@+id/drawer"
+        android:background="#E0DFE1"
+        android:fitsSystemWindows="false"
+        tools:openDrawer="start">
 
-    <Button
-        android:textSize="16sp"
-        android:textColor="#FFF"
-        android:layout_centerInParent="true"
-        android:onClick="chatDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <include
+            android:id="@+id/inclde_toolbar"
+            layout="@layout/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp" />
 
-</RelativeLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:layout_marginTop="@dimen/_200sdp"
+                android:text="chat Open"
+                android:onClick="chatDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="false"
+            app:headerLayout="@layout/astro_navheader"
+            app:menu="@menu/astro_menu" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:elevation="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_45sdp">
+
+                        <TextView
+                            android:paddingBottom="13dp"
+                            android:gravity="bottom"
+                            android:visibility="visible"
+                            android:id="@+id/navigation_header_textview"
+                            android:textColor="@color/white"
+                            android:text="Astro4Call"
+                            android:textSize="20sp"
+                            android:background="@color/purple_500"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:paddingLeft="30dp"/>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_4sdp"
+                        android:background="@drawable/toolbar_dropshadow"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>

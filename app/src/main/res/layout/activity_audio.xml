@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -29,12 +29,12 @@
                 android:src="@drawable/btn_unmute_normal" />
 
             <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="20"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:onClick="onSwitchSpeakerphoneClicked"
                 android:scaleType="centerInside"
-                android:src="@drawable/phone_call" />
+                android:background="@drawable/ic_baseline_volume_up_24" />
 
             <ImageView
                 android:layout_width="0dp"

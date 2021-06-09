@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.astro4callapp.astro4call.R;
+import com.astro4callapp.astro4call.utilities.Constants;
 import com.astro4callapp.astro4call.utilities.PreferenceManager;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -159,9 +160,6 @@ public class VideoCallingActivity extends AppCompatActivity {
     }
 
 
-    private FirebaseDatabase rootNode;
-    private DatabaseReference reference;
-    private PreferenceManager preferenceManager;
 
 
     @Override
@@ -169,11 +167,6 @@ public class VideoCallingActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_video_calling );
 
-
-        preferenceManager = new PreferenceManager( getApplicationContext() );
-
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference().child( "Astrologers" ).child(preferenceManager.getString( com.astro4callapp.astro4call.utilities.Constants.KEY_USER_REG_ID1 ));
 
 
         initUI();
@@ -366,6 +359,7 @@ public class VideoCallingActivity extends AppCompatActivity {
         removeFromParent(mRemoteVideo);
         mRemoteVideo = null;
         leaveChannel();
+        onBackPressed();
     }
 
     private void showButtons(boolean show) {
@@ -410,12 +404,7 @@ public class VideoCallingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        updateStatus( "busy" );
     }
 
-    public void updateStatus(String status) {
-        reference.child( "status" ).setValue( status );
-    }
 
 }

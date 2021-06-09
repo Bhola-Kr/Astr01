@@ -1,9 +1,401 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".navigation_act.PackageActivity">
+    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".navigation_act.PackageActivity">
+
+
+        <include
+            android:id="@+id/inclde_toolbar"
+            layout="@layout/appbarlayoutsecond"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+        </include>
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/inclde_toolbar"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                app:cardElevation="@dimen/_10sdp"
+                android:id="@+id/card_package_first"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:elevation="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_20sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/card_first_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_16sdp"
+                        android:backgroundTint="@color/blue"
+                        android:clickable="false"
+                        android:text="Small">
+
+                    </Button>
+
+                    <TextView
+
+                        android:id="@+id/rupee_sign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_toRightOf="@+id/card_first_text"
+                        android:text="₹"
+                        android:textColor="#2196F3"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintStart_toEndOf="@+id/card_first_text"
+                        tools:layout_editor_absoluteY="34dp" />
+
+                    <TextView
+                        android:id="@+id/rupee_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_toRightOf="@id/rupee_sign"
+                        android:text="99"
+                        android:textColor="#2196F3"
+                        android:textSize="@dimen/_31sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/first_talktime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/card_first_text"
+                        android:layout_margin="@dimen/_15sdp"
+                        android:text="Get 5 mins talktime"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="28dp"
+                        tools:layout_editor_absoluteY="112dp" />
+
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                app:cardElevation="@dimen/_10sdp"
+                android:id="@+id/card_package_first2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:elevation="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_20sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/card_first_text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_16sdp"
+                        android:backgroundTint="@color/blue"
+                        android:clickable="false"
+                        android:text="Medium">
+
+                    </Button>
+
+                    <TextView
+
+                        android:id="@+id/rupee_sign2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_toRightOf="@+id/card_first_text2"
+                        android:text="₹"
+                        android:textColor="#2196F3"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintStart_toEndOf="@+id/card_first_text2"
+                        tools:layout_editor_absoluteY="34dp" />
+
+                    <TextView
+                        android:id="@+id/rupee_price2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_toRightOf="@id/rupee_sign2"
+                        android:text="199"
+                        android:textColor="#2196F3"
+                        android:textSize="@dimen/_31sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/first_talktime2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/card_first_text2"
+                        android:layout_margin="@dimen/_15sdp"
+                        android:text="Get 10 mins talktime"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="28dp"
+                        tools:layout_editor_absoluteY="112dp" />
+
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll1"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/card_package_first3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:elevation="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_20sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/card_first_text3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_16sdp"
+                        android:backgroundTint="@color/blue"
+                        android:clickable="false"
+                        android:text="Bronze">
+
+                    </Button>
+
+                    <TextView
+
+                        android:id="@+id/rupee_sign3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_toRightOf="@+id/card_first_text3"
+                        android:text="₹"
+                        android:textColor="#2196F3"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintStart_toEndOf="@+id/card_first_text3"
+                        tools:layout_editor_absoluteY="34dp" />
+
+                    <TextView
+                        android:id="@+id/rupee_price3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_toRightOf="@id/rupee_sign3"
+                        android:text="349"
+                        android:textColor="#2196F3"
+                        android:textSize="@dimen/_31sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/first_talktime3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/card_first_text3"
+                        android:layout_margin="@dimen/_15sdp"
+                        android:text="Get 20 mins talktime"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="28dp"
+                        tools:layout_editor_absoluteY="112dp" />
+
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll2"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/card_package_first4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:elevation="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_20sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/card_first_text4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_16sdp"
+                        android:backgroundTint="@color/blue"
+                        android:clickable="false"
+                        android:text="Gold">
+
+                    </Button>
+
+                    <TextView
+
+                        android:id="@+id/rupee_sign4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_toRightOf="@+id/card_first_text4"
+                        android:text="₹"
+                        android:textColor="#2196F3"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintStart_toEndOf="@+id/card_first_text4"
+                        tools:layout_editor_absoluteY="34dp" />
+
+                    <TextView
+                        android:id="@+id/rupee_price4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_toRightOf="@id/rupee_sign4"
+                        android:text="499"
+                        android:textColor="#2196F3"
+                        android:textSize="@dimen/_31sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/first_talktime4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/card_first_text4"
+                        android:layout_margin="@dimen/_15sdp"
+                        android:text="Get 30 mins talktime"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="28dp"
+                        tools:layout_editor_absoluteY="112dp" />
+
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll3"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/card_package_first5"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:elevation="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_20sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/card_first_text5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_16sdp"
+                        android:backgroundTint="@color/blue"
+                        android:clickable="false"
+                        android:text="Diamond">
+
+                    </Button>
+
+                    <TextView
+
+                        android:id="@+id/rupee_sign5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_toRightOf="@+id/card_first_text5"
+                        android:text="₹"
+                        android:textColor="#2196F3"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintStart_toEndOf="@+id/card_first_text5"
+                        tools:layout_editor_absoluteY="34dp" />
+
+                    <TextView
+                        android:id="@+id/rupee_price5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_toRightOf="@id/rupee_sign5"
+                        android:text="999"
+                        android:textColor="#2196F3"
+                        android:textSize="@dimen/_31sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/first_talktime5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/card_first_text5"
+                        android:layout_margin="@dimen/_15sdp"
+                        android:text="Get 60 mins talktime"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="28dp"
+                        tools:layout_editor_absoluteY="112dp" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>

@@ -17,11 +17,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/toolbar_texts"
             android:singleLine="true"
-            android:text="hjh"
+            android:text="Astro4Call"
             android:textColor="#fff"
             android:textStyle="bold"
             android:textSize="@dimen/_21sdp"
-            android:gravity="center"/>
+            />
 
     </androidx.appcompat.widget.Toolbar>
 </LinearLayout>

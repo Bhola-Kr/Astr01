@@ -1,18 +1,17 @@
 package com.astro4callapp.astro4call.invitation;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.astro4callapp.astro4call.R;
 import com.astro4callapp.astro4call.audio_video.AudioActivity;
@@ -27,75 +26,72 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.URL;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AcceptActivity extends AppCompatActivity {
 
-    private String meetingType=null;
+    private String meetingType = null;
 
+    private PreferenceManager preferenceManager;
     private FirebaseDatabase rootNode;
     private DatabaseReference reference;
-    private PreferenceManager preferenceManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accept);
-
-
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_accept );
 
         preferenceManager = new PreferenceManager( getApplicationContext() );
-
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference().child( "Astrologers" ).child(preferenceManager.getString( Constants.KEY_USER_REG_ID1 ));
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference().child( "Astrologers" ).child( preferenceManager.getString( Constants.KEY_USER_REG_ID1_ASTRO ) );
 
-        ImageView imageViewMeetingType = findViewById(R.id.imageMeetingType);
 
-        meetingType = getIntent().getStringExtra(Constants.REMOTE_MSG_MEETING_TYPE);
+        ImageView imageViewMeetingType = findViewById( R.id.imageMeetingType );
+
+        meetingType = getIntent().getStringExtra( Constants.REMOTE_MSG_MEETING_TYPE );
 
         if (meetingType != null) {
-            if (meetingType.equals("video")) {
-                imageViewMeetingType.setImageResource(R.drawable.video);
-            }else{
-                imageViewMeetingType.setImageResource(R.drawable.telephone1);
+            if (meetingType.equals( "video" )) {
+                imageViewMeetingType.setImageResource( R.drawable.video );
+            } else {
+                imageViewMeetingType.setImageResource( R.drawable.telephone1 );
             }
         }
 
-        Toast.makeText( this, ""+meetingType, Toast.LENGTH_SHORT ).show();
+        // Toast.makeText( this, ""+meetingType, Toast.LENGTH_SHORT ).show();
 
 
-        TextView textFirstChar = findViewById(R.id.text_incomfirstChar);
-        TextView userName = findViewById(R.id.text_incom_UserName);
-        TextView userEmail = findViewById(R.id.textIncomEmail);
+        TextView textFirstChar = findViewById( R.id.text_incomfirstChar );
+        TextView userName = findViewById( R.id.text_incom_UserName );
 
 
-        String firstName = getIntent().getStringExtra(Constants.KEY_FIRST_NAME);
+        String firstName = getIntent().getStringExtra( Constants.KEY_FIRST_NAME );
         // String firstEmail = getIntent().getStringExtra(Constants.KEY_EMAIL);
 
 
         if (firstName != null) {
-            textFirstChar.setText(firstName.substring(0, 1));
+            textFirstChar.setText( firstName.substring( 0, 1 ) );
         }
-        userName.setText(firstName);
-       // userEmail.setText(firstEmail);
+        userName.setText( firstName );
+        // userEmail.setText(firstEmail);
 
-        ImageView imageAcceptedInvitation = findViewById(R.id.imageAcceptMeeting_incom);
-        ImageView imageRejectedInvitation = findViewById(R.id.reject_meeting_incom_iv);
+        ImageView imageAcceptedInvitation = findViewById( R.id.imageAcceptMeeting_incom );
+        ImageView imageRejectedInvitation = findViewById( R.id.reject_meeting_incom_iv );
 
 
-        imageAcceptedInvitation.setOnClickListener(v -> sendInvitationResponse(
+        imageAcceptedInvitation.setOnClickListener( v->sendInvitationResponse(
                 Constants.REMOTE_MSG_INVITATION_ACCEPTED,
-                getIntent().getStringExtra(Constants.REMOTE_MSG_INVITOR_TOKEN)
-        ));
+                getIntent().getStringExtra( Constants.REMOTE_MSG_INVITOR_TOKEN )
+        ) );
 
-        imageRejectedInvitation.setOnClickListener(v -> sendInvitationResponse(
+        imageRejectedInvitation.setOnClickListener( v->sendInvitationResponse(
                 Constants.REMOTE_MSG_INVITATION_REJECTED,
-                getIntent().getStringExtra(Constants.REMOTE_MSG_INVITOR_TOKEN)
-        ));
+                getIntent().getStringExtra( Constants.REMOTE_MSG_INVITOR_TOKEN )
+        ) );
     }
 
 
@@ -103,22 +99,22 @@ public class AcceptActivity extends AppCompatActivity {
 
         try {
             JSONArray token = new JSONArray();
-            token.put(reciverToken);
+            token.put( reciverToken );
 
             JSONObject body = new JSONObject();
             JSONObject data = new JSONObject();
 
-            data.put(Constants.REMOTE_MSG_TYPE, Constants.REMOTE_MSG_INITIATION_RESPONSE);
-            data.put(Constants.REMOTE_MSG_INITIATION_RESPONSE, type);
+            data.put( Constants.REMOTE_MSG_TYPE, Constants.REMOTE_MSG_INITIATION_RESPONSE );
+            data.put( Constants.REMOTE_MSG_INITIATION_RESPONSE, type );
 
-            body.put(Constants.REMOTE_MSG_DATA, data);
-            body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, token);
+            body.put( Constants.REMOTE_MSG_DATA, data );
+            body.put( Constants.REMOTE_MSG_REGISTRATION_IDS, token );
 
-            sendRemoteMessage(body.toString(), type);
+            sendRemoteMessage( body.toString(), type );
 
 
         } catch (Exception e) {
-            Toast.makeText(this, "Error " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText( this, "Error " + e.getMessage(), Toast.LENGTH_SHORT ).show();
             finish();
         }
 
@@ -128,29 +124,25 @@ public class AcceptActivity extends AppCompatActivity {
 
     private void sendRemoteMessage(String remoteMessageBody, String type) {
 
-        ApiClient.getClient().create( ApiService.class).sendRemoteMessage(
+        ApiClient.getClient().create( ApiService.class ).sendRemoteMessage(
                 Constants.getRemoteMessageHeaders(), remoteMessageBody
-        ).enqueue(new Callback<String>() {
+        ).enqueue( new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
 
-                    if (type.equals(Constants.REMOTE_MSG_INVITATION_ACCEPTED)) {
+                    if (type.equals( Constants.REMOTE_MSG_INVITATION_ACCEPTED )) {
                         try {
 
-                            Log.d("value",type);
-
-                            if (type.equals( "audio" )){
-//                                startActivity( new Intent(getApplicationContext(), AudioActivity.class) );
-//                                finish();
-                            }else {
-
-                                startActivity( new Intent(getApplicationContext(), AudioActivity.class) );
-                                finish();
-                                // startActivity( new Intent(getApplicationContext(),VideoCallingActivity.class) );
-                              //  finish();
+                            if (meetingType != null) {
+                                if (meetingType.equals( "video" )) {
+                                    startActivity( new Intent( getApplicationContext(), VideoCallingActivity.class ) );
+                                    finish();
+                                } else {
+                                    startActivity( new Intent( getApplicationContext(), AudioActivity.class ) );
+                                    finish();
+                                }
                             }
-
 
 
 //                            URL serverUrl=new URL("https://meet.jit.si");
@@ -167,19 +159,19 @@ public class AcceptActivity extends AppCompatActivity {
 //                            JitsiMeetActivity.launch(IncomingInvitationAct.this,builder.build());
 //                            finish();
 
-                        }catch (Exception e){
-                            Toast.makeText(AcceptActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Toast.makeText( AcceptActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT ).show();
                             finish();
                         }
 
 
                     } else {
-                        Toast.makeText(AcceptActivity.this, "Call Rejected..", Toast.LENGTH_SHORT).show();
+                        Toast.makeText( AcceptActivity.this, "Call Rejected..", Toast.LENGTH_SHORT ).show();
                         finish();
                     }
 
                 } else {
-                    Toast.makeText(AcceptActivity.this, "Response error" + response.message(), Toast.LENGTH_LONG).show();
+                    Toast.makeText( AcceptActivity.this, "Response error" + response.message(), Toast.LENGTH_LONG ).show();
                     finish();
                 }
 
@@ -188,21 +180,21 @@ public class AcceptActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                Toast.makeText(AcceptActivity.this, "Error" + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText( AcceptActivity.this, "Error" + t.getMessage(), Toast.LENGTH_LONG ).show();
                 finish();
             }
-        });
+        } );
 
     }
 
     private BroadcastReceiver invitationResponseReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String type = intent.getStringExtra(Constants.REMOTE_MSG_INITIATION_RESPONSE);
+            String type = intent.getStringExtra( Constants.REMOTE_MSG_INITIATION_RESPONSE );
 
             if (type != null) {
-                if (type.equals(Constants.REMOTE_MSG_INVITATION_CANCELLED)) {
-                    Toast.makeText(context, "Invitation Cancelled..", Toast.LENGTH_SHORT).show();
+                if (type.equals( Constants.REMOTE_MSG_INVITATION_CANCELLED )) {
+                    Toast.makeText( context, "Invitation Cancelled..", Toast.LENGTH_SHORT ).show();
                     finish();
                 }
             }
@@ -213,18 +205,20 @@ public class AcceptActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(
+        LocalBroadcastManager.getInstance( getApplicationContext() ).registerReceiver(
                 invitationResponseReceiver,
-                new IntentFilter( Constants.REMOTE_MSG_INITIATION_RESPONSE)
+                new IntentFilter( Constants.REMOTE_MSG_INITIATION_RESPONSE )
         );
+
         updateStatus( "busy" );
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(
+        LocalBroadcastManager.getInstance( getApplicationContext() ).unregisterReceiver(
                 invitationResponseReceiver
         );
     }
@@ -233,6 +227,7 @@ public class AcceptActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         updateStatus( "online" );
     }
 
